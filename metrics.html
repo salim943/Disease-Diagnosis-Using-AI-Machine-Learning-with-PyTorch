@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification Metrics Explanation</title>
+</head>
+<body>
+    <h1>Classification Metrics Explanation</h1>
+
+    <p>The metrics you're seeing are commonly used to evaluate classification models, and they're very helpful for understanding how well a model is performing, especially when dealing with imbalanced classes. Let's break them down:</p>
+
+    <h2>1. Precision</h2>
+    <p><strong>Definition:</strong> Precision is the ratio of correctly predicted positive observations to the total predicted positives.</p>
+    <p><strong>Formula:</strong> <br>
+    Precision = <code>TP / (TP + FP)</code>
+    </p>
+    <p>Where:</p>
+    <ul>
+        <li><strong>TP</strong> = True Positives (correctly predicted positives)</li>
+        <li><strong>FP</strong> = False Positives (incorrectly predicted as positive)</li>
+    </ul>
+    <p><strong>Interpretation:</strong> Precision tells you how many of the instances predicted as a certain class (e.g., "PNEUMONIA") were actually that class.</p>
+    <p>For example, for <strong>PNEUMONIA</strong>: a precision of 1.00 means that every time the model predicted pneumonia, it was correct.</p>
+
+    <h2>2. Recall (Sensitivity, True Positive Rate)</h2>
+    <p><strong>Definition:</strong> Recall is the ratio of correctly predicted positive observations to all observations in the actual class.</p>
+    <p><strong>Formula:</strong> <br>
+    Recall = <code>TP / (TP + FN)</code>
+    </p>
+    <p>Where:</p>
+    <ul>
+        <li><strong>TP</strong> = True Positives</li>
+        <li><strong>FN</strong> = False Negatives (instances of the positive class that were misclassified as negative)</li>
+    </ul>
+    <p><strong>Interpretation:</strong> Recall tells you how many of the actual instances of a certain class were correctly identified by the model. High recall means the model is good at detecting positives.</p>
+    <p>For <strong>PNEUMONIA</strong>: a recall of 0.84 means that the model identified 84% of the actual pneumonia cases, but missed 16%.</p>
+
+    <h2>3. F1-Score</h2>
+    <p><strong>Definition:</strong> The F1-score is the harmonic mean of precision and recall, balancing the two metrics. It's useful when you need to balance the importance of precision and recall.</p>
+    <p><strong>Formula:</strong> <br>
+    F1-Score = <code>2 × (Precision × Recall) / (Precision + Recall)</code>
+    </p>
+    <p><strong>Interpretation:</strong> The F1-score provides a single metric that balances precision and recall. It's especially useful when there is an imbalance between precision and recall (i.e., when one is much higher than the other).</p>
+    <p>For <strong>PNEUMONIA</strong>: an F1-score of 0.91 means the model has a good balance between precision and recall for this class.</p>
+
+    <h2>4. Support</h2>
+    <p><strong>Definition:</strong> Support refers to the number of actual occurrences of the class in the dataset (i.e., how many instances of a particular class are present).</p>
+    <p><strong>Interpretation:</strong> Support helps you understand the class distribution. For instance, your dataset has:</p>
+    <ul>
+        <li><strong>1,349 instances of "NORMAL"</li>
+        <li><strong>3,883 instances of "PNEUMONIA"</li>
+    </ul>
+
+    <p>Given the 80-20 train-test split:</p>
+    <ul>
+        <li><strong>NORMAL Class (Validation set):</strong> 270 images</li>
+        <li><strong>PNEUMONIA Class (Validation set):</strong> 777 images</li>
+    </ul>
+
+    <h2>Summary of Your Results:</h2>
+
+    <h3>NORMAL Class:</h3>
+    <ul>
+        <li><strong>Precision:</strong> 0.69 → 69% of predictions for NORMAL were correct.</li>
+        <li><strong>Recall:</strong> 0.99 → 99% of actual NORMAL cases were correctly identified.</li>
+        <li><strong>F1-Score:</strong> 0.81 → The balance between precision and recall for NORMAL is good, but recall is dominant (good at identifying NORMAL cases).</li>
+        <li><strong>Support:</strong> 270 → There are 270 instances of the NORMAL class in the validation set.</li>
+    </ul>
+
+    <h3>PNEUMONIA Class:</h3>
+    <ul>
+        <li><strong>Precision:</strong> 1.00 → The model is perfectly precise in predicting pneumonia (every time it predicts pneumonia, it’s correct).</li>
+        <li><strong>Recall:</strong> 0.84 → It correctly identifies 84% of the actual pneumonia cases.</li>
+        <li><strong>F1-Score:</strong> 0.91 → A very strong F1 score, indicating a good balance between precision and recall.</li>
+        <li><strong>Support:</strong> 777 → There are 777 instances of the PNEUMONIA class in the validation set.</li>
+    </ul>
+
+    <h2>Overall Metrics:</h2>
+    <ul>
+        <li><strong>Accuracy:</strong> 0.88 → The model is correct 88% of the time based on the validation set.</li>
+    </ul>
+
+    <h3>Macro Average:</h3>
+    <ul>
+        <li><strong>Precision:</strong> 0.84</li>
+        <li><strong>Recall:</strong> 0.92</li>
+        <li><strong>F1-Score:</strong> 0.86</li>
+    </ul>
+    <p>These are averaged across all classes, treating each class equally (i.e., without considering the class imbalance).</p>
+
+    <h3>Weighted Average:</h3>
+    <ul>
+        <li><strong>Precision:</strong> 0.92</li>
+        <li><strong>Recall:</strong> 0.88</li>
+        <li><strong>F1-Score:</strong> 0.89</li>
+    </ul>
+    <p>These averages account for class imbalance, so they give more weight to the larger class (PNEUMONIA).</p>
+
+    <h2>Why these metrics matter:</h2>
+    <ul>
+        <li><strong>Precision</strong> is more important when you care about minimizing false positives. For example, if a model falsely predicts pneumonia when it’s not actually pneumonia, it could be dangerous.</li>
+        <li><strong>Recall</strong> is critical when you want to capture as many true positive cases as possible (minimize false negatives), which is often important in medical diagnoses.</li>
+        <li><strong>F1-score</strong> is useful when you need a balance between precision and recall, especially in scenarios with class imbalances.</li>
+    </ul>
+</body>
+</html>
